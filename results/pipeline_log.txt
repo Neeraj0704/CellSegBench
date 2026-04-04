@@ -1,0 +1,62 @@
+model_type argument is not used in v4.0.1+. Ignoring this argument...
+
+============================================================
+STEP 1: Load DAPI tile  [0.0 min]
+============================================================
+Tile: (512, 512)  (109×109 µm)
+Tile bounds: x=[5682, 5791] µm, y=[2859, 2968] µm  [0.1 min]
+
+============================================================
+STEP 2: Cellpose segmentation  [0.1 min]
+============================================================
+Model loaded  [0.2 min]
+Cellpose: 91 nuclei detected (diameter=30px)  [2.1 min]
+Saved: cellpose_segmentation_map.png  [2.1 min]
+Polygons extracted: 91  [2.1 min]
+Cell area (µm²): mean=21.7, median=20.6
+Transcript assignment: 4,138/12,848 assigned (32.2%)
+Transcripts/cell: mean=45.5, median=35.0  [2.2 min]
+
+============================================================
+STEP 3: Evaluation vs 10x reference  [2.2 min]
+============================================================
+10x cells in tile: 97  (nucleus boundary vertices: 2,389)
+Reference polygons built: 97  [2.2 min]
+
+--- Cellpose vs 10x reference ---
+  Matched cells:      77 / 97 reference nuclei (79.4% recall)
+  Mean IoU:           0.780
+  Mean Dice:          0.872
+  [2.2 min]
+
+      Method  Cells detected  Transcripts assigned  Unassigned %  Mean TPC  Median TPC Mean IoU vs ref Mean Dice vs ref Recall vs ref
+Xenium (10x)              97                  9500          26.1       0.0         0.0               —                —             —
+    Cellpose              91                  4138          67.8      45.5        35.0            0.78            0.872         0.794
+Saved evaluation figures  [2.2 min]
+Saved: side_by_side_segmentation.png  [2.3 min]
+
+============================================================
+STEP 4: Downstream analysis  [2.3 min]
+============================================================
+Loading 10x cell feature matrix...
+AnnData: 209,467 cells × 280 genes  [2.6 min]
+After QC: 201,446 cells × 280 genes
+Traceback (most recent call last):
+  File "/Users/neerajvp/.pyenv/versions/3.11.9/lib/python3.11/site-packages/scanpy/preprocessing/_highly_variable_genes.py", line 71, in _highly_variable_genes_seurat_v3
+    from skmisc.loess import loess
+ModuleNotFoundError: No module named 'skmisc'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/neerajvp/Documents/Projects/CellSegBench/CellSegBench/notebooks/run_full_pipeline.py", line 293, in <module>
+    sc.pp.highly_variable_genes(adata, n_top_genes=min(200, adata.n_vars), flavor="seurat_v3", span=1.0)
+  File "/Users/neerajvp/.pyenv/versions/3.11.9/lib/python3.11/site-packages/legacy_api_wrap/__init__.py", line 88, in fn_compatible
+    return fn(*args_all, **kw)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/neerajvp/.pyenv/versions/3.11.9/lib/python3.11/site-packages/scanpy/preprocessing/_highly_variable_genes.py", line 701, in highly_variable_genes
+    return _highly_variable_genes_seurat_v3(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/neerajvp/.pyenv/versions/3.11.9/lib/python3.11/site-packages/scanpy/preprocessing/_highly_variable_genes.py", line 74, in _highly_variable_genes_seurat_v3
+    raise ImportError(msg) from e
+ImportError: Please install skmisc package via `pip install --user scikit-misc

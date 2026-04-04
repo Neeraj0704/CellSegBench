@@ -1,0 +1,63 @@
+Reading transcripts with PyArrow filter pushdown...
+Total rows in file: 64,581,006
+Filtered transcripts: 55,283,583 (1.68 GB in memory)
+Saved: qscore_filtering.png
+
+Genes in panel: 280
+Top 15:
+feature_name
+MALAT1      3536599
+EEF1G       2190949
+MTCO1P40    1576027
+EEF2        1551420
+H3F3B       1443450
+SFRP1       1420749
+VEGFA       1416894
+LDHA        1087032
+RPLP0        978586
+PPIB         928566
+ITGB1        924928
+CD74         884953
+NDRG1        865773
+GAPDH        856430
+ENO1         851879
+Saved: top_genes.png
+
+Spatial distribution plot (150k sample)...
+Saved: transcript_spatial_distribution.png
+
+Marker genes: ['EPCAM', 'CD68', 'CD3E', 'KRT17']
+Saved: marker_genes_spatial.png
+
+Loading 10x reference data...
+10x cells: 209,467
+Segmentation method: Segmented by boundary stain (ATP1A1+CD45+E-Cadherin)
+
+Cell area (µm²):
+count    209467.00
+mean         71.01
+std          50.50
+min           2.03
+25%          36.08
+50%          56.67
+75%          91.40
+max         801.16
+
+10x assigned:   43,538,027 (78.8%)
+10x unassigned: 11,745,556 (21.2%)
+Transcripts/cell — mean: 209.1, median: 137.0
+Saved: cell_area_distribution_10x.png
+
+Saving filtered transcripts...
+Saved: transcripts_filtered.parquet (55,283,583 rows)
+
+Loading DAPI image (cropped thumbnail for visualisation)...
+DAPI full shape: (27420, 53994), dtype: uint16
+Saved: dapi_image.png
+
+=== NOTEBOOK 01 COMPLETE ===
+  Filtered transcripts:  55,283,583
+  Unique genes:          280
+  10x cells:             209,467
+  10x assignment rate:   78.8%
+  Results → /Users/neerajvp/Documents/Projects/CellSegBench/CellSegBench/results
