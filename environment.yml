@@ -1,0 +1,27 @@
+name: cellsegbench
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - jupyter
+  - jupyterlab
+  - numpy
+  - pandas
+  - matplotlib
+  - seaborn
+  - scikit-image
+  - scikit-learn
+  - tifffile
+  - pip:
+    - squidpy
+    - scanpy
+    - anndata
+    - cellpose
+    - shapely
+    - geopandas
+    - leidenalg
+    - python-igraph
+    - tqdm
+    - pyarrow

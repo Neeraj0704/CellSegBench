@@ -8,6 +8,44 @@ Cell segmentation is a foundational step in spatial transcriptomics analysis —
 
 This project systematically compares three segmentation approaches on a public human breast cancer Xenium dataset, quantifying both their technical differences and their downstream biological consequences. A key focus is evaluating segmentation quality using the **ground truth nuclear boundaries** provided by the Xenium platform's DAPI nuclear staining, enabling accuracy assessment beyond summary statistics alone.
 
+## Project Status
+
+### Progress Timeline
+
+**Phase 1 — Setup & Data Understanding** (Late Jan – Mid Feb)
+- Selected the 10x Genomics Xenium human breast cancer FFPE dataset as the benchmark target
+- Installed and configured the full software stack: Python, Squidpy, Cellpose, and Baysor (Julia binary)
+- Explored dataset structure: transcript coordinate files, spatial images, and 10x-provided nucleus masks
+
+**Phase 2 — Preprocessing & Exploration** (Mid Feb – Early Mar)
+- Loaded and cleaned spatial transcriptomics data; filtered low-quality transcripts
+- Visualized transcript density distributions across the tissue section
+- Verified dataset compatibility with all three segmentation tools
+
+**Phase 3 — Initial Implementation** (Mar – Present)
+- Ran Cellpose on DAPI nuclear staining images; generated nucleus segmentation masks
+- Ran Baysor on transcript coordinate data; generated probabilistic cell assignments
+- Produced initial outputs: segmentation maps, cell counts, and transcript-per-cell distributions
+
+---
+
+### Updates Since Proposal (Jan 28)
+
+The original proposal described evaluation primarily through summary statistics (cell counts, transcript distributions). The evaluation strategy has since been extended based on what the dataset actually provides:
+
+**When reference boundaries are available** (DAPI nucleus masks from Xenium):
+- IoU and Dice coefficient between predicted boundaries and DAPI nuclei
+- Boundary F1 score (precision/recall of cell boundary pixels)
+- Matched cell rate (fraction of DAPI nuclei recovered by each method)
+
+**When ground truth is unavailable or approximate:**
+- Stability analysis — how sensitive each method's output is to parameter changes (e.g., Cellpose diameter, Baysor prior cell radius)
+- Biological consistency — whether cell-type clustering and spatial structure are coherent and reproducible across methods
+
+This makes the evaluation both geometry-grounded (where reference data exists) and biologically interpretable (as a proxy where it does not).
+
+---
+
 ## Data
 
 **Dataset:** [Xenium In Situ Gene Expression — Human Breast Cancer (FFPE)](https://www.10xgenomics.com/datasets/xenium-ffpe-human-breast-biomarkers), 10x Genomics.
