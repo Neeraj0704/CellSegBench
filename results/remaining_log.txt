@@ -1,0 +1,75 @@
+model_type argument is not used in v4.0.1+. Ignoring this argument...
+Tile transcripts: 12,848  [0.0 min]
+
+============================================================
+STEP 1: Transcript-based GMM segmentation  [0.0 min]
+============================================================
+GMM cells: 97  [0.0 min]
+Transcripts/cell: mean=132.5, median=129.0
+GMM polygons: 97  [0.0 min]
+Saved: gmm_segmentation_map.png  [0.1 min]
+
+============================================================
+STEP 2: Cellpose parameter sweep  [0.1 min]
+============================================================
+  diameter=20px (4.2µm) → 87 cells  [5.3 min]
+  diameter=30px (6.4µm) → 91 cells  [8.2 min]
+  diameter=40px (8.5µm) → 109 cells  [9.2 min]
+CV (cell count stability): 0.122
+Saved: cellpose_diameter_sweep.png  [9.2 min]
+
+============================================================
+STEP 3: 3-way evaluation  [9.2 min]
+============================================================
+
+          Method  Cells  Assigned %  Mean TPC  Median TPC Mean IoU Mean Dice Recall
+    Xenium (10x)     97        73.9       0.0         0.0        —         —      —
+        Cellpose     91        32.2      45.5        35.0     0.78     0.872  0.794
+GMM (transcript)     97       100.0     132.5       129.0    0.449     0.614  0.144
+Saved: three_way_iou_comparison.png  [9.2 min]
+Saved: side_by_side_3way.png  [9.2 min]
+Saved: transcripts_per_cell_comparison.png  [9.3 min]
+
+============================================================
+STEP 4: Per-method downstream (tile-level)  [9.3 min]
+============================================================
+  Xenium_10x: 115 cells, 3 clusters  [9.4 min]
+  Cellpose: 90 cells, 3 clusters  [9.4 min]
+  GMM: 97 cells, 4 clusters  [9.4 min]
+Saved: umap_comparison_methods.png  [9.4 min]
+Saved: spatial_comparison_methods.png  [9.4 min]
+
+============================================================
+ALL REMAINING STEPS COMPLETE in 9.4 minutes
+============================================================
+
+Final figures & results:
+  cell_area_distribution_10x.png
+  cellpose_area_distribution.png
+  cellpose_diameter_sweep.csv
+  cellpose_diameter_sweep.png
+  cellpose_iou_distribution.png
+  cellpose_segmentation_map.png
+  cluster_proportions_10x.png
+  dapi_image.png
+  gmm_segmentation_map.png
+  marker_dotplot_10x.png
+  marker_genes_spatial.png
+  method_comparison_bar.png
+  method_summary_stats.csv
+  qscore_filtering.png
+  side_by_side_3way.png
+  side_by_side_segmentation.png
+  spatial_clusters_10x.png
+  spatial_comparison_methods.png
+  three_way_iou_comparison.png
+  top_genes.png
+  transcript_spatial_distribution.png
+  transcripts_per_cell_comparison.png
+  umap_comparison_methods.png
+  umap_leiden_10x.png
+
+Key results:
+  Cellpose  — IoU: 0.780, Dice: 0.872, Recall: 79.4%
+  GMM       — IoU: 0.449, Dice: 0.614, Recall: 14.4%
+  Cellpose sweep CV: 0.122

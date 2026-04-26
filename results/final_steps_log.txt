@@ -1,0 +1,21 @@
+Loading processed AnnData...
+Cells: 201,446, Clusters: 7
+Annotating cell types...
+Saved: umap_cell_types_annotated.png
+Saved: cell_type_proportions.png
+
+Cell type proportions:
+  Epithelial: 27.5%
+  Stromal/Fibroblast: 20.6%
+  Macrophage: 16.1%
+  Epithelial (basal): 10.8%
+  T Cell: 9.3%
+  Endothelial: 9.0%
+  Myoepithelial: 6.7%
+Saved: spatial_cell_types.png
+
+Computing spatial co-occurrence...
+Saved: neighbourhood_enrichment.png
+
+=== FINAL STEPS COMPLETE ===
+Cell types annotated, neighbourhood enrichment computed.

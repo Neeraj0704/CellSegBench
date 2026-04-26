@@ -1,0 +1,27 @@
+Loading Baysor output...
+Baysor cells:          38
+Noise transcripts:     27 (0.2%)
+Assigned transcripts:  12821 (99.8%)
+Transcripts/cell:      mean=337.4, median=248.5
+
+Loading Baysor polygons...
+Baysor polygons loaded: 36
+
+Cellpose  — IoU: 0.780, Dice: 0.872, Recall: 79.4%
+Baysor    — IoU: 0.392, Dice: 0.563, Recall: 2.1%
+
+      Method  Cells  Assigned %  Mean TPC  Median TPC Mean IoU Mean Dice Recall
+Xenium (10x)     97        73.9       0.0         0.0        —         —      —
+    Cellpose     91        32.2      45.5        35.0     0.78     0.872  79.4%
+      Baysor     38        99.8     337.4       248.5    0.392     0.563   2.1%
+Saved: three_way_iou_comparison.png
+Saved: side_by_side_3way.png
+Saved: transcripts_per_cell_comparison.png
+
+Running Baysor downstream analysis...
+Baysor: 36 cells, 2 clusters
+Saved: umap_baysor.png
+
+=== BAYSOR EVALUATION COMPLETE ===
+Baysor  — cells: 38, IoU: 0.392, Dice: 0.563, Recall: 2.1%
+Cellpose — cells: 91, IoU: 0.780, Dice: 0.872, Recall: 79.4%

@@ -1,3 +1,4 @@
-Method,Cells detected,Transcripts assigned,Unassigned %,Mean TPC,Median TPC,Mean IoU vs ref,Mean Dice vs ref,Recall vs ref
-Xenium (10x),97,9500,26.1,0.0,0.0,—,—,—
-Cellpose,91,4138,67.8,45.5,35.0,0.78,0.872,0.794
+Method,Cells,Assigned %,Mean TPC,Median TPC,Mean IoU,Mean Dice,Recall
+Xenium (10x),97,73.9,0.0,0.0,—,—,—
+Cellpose,91,32.2,45.5,35.0,0.78,0.872,79.4%
+Baysor,38,99.8,337.4,248.5,0.392,0.563,2.1%
