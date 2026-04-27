@@ -1,0 +1,109 @@
+[0.0m] Loading reference polygons...
+[0.0m] Loading segmentation polygons...
+[0.1m] Cellpose: 1296, Baysor (filtered): 1171
+[0.1m] Computing IoU...
+[0.1m] 
+FIX 1: Fair same-reference comparison
+
+=== SAME REFERENCE (CELL BOUNDARIES) — FAIR COMPARISON ===
+Cellpose vs cell reference: IoU=0.555, Dice=0.702, Recall=71.6%
+Baysor   vs cell reference: IoU=0.444, Dice=0.607, Recall=31.4%
+
+Note: Even vs same reference, Cellpose (IoU=0.555) > Baysor (IoU=0.444)
+Explanation: Cellpose nucleus polygons are contained within cell boundaries,
+giving partial overlap. Baysor cell boundaries have different shapes due to
+transcript-density vs membrane-stain definitions.
+
+Cellpose vs cell: 0.555 [0.546, 0.564]
+Baysor   vs cell: 0.444 [0.434, 0.455]
+[0.1m] 
+FIX 2: Baysor IoU constant — area mismatch analysis
+
+=== BAYSOR AREA VS SCALE VS IoU ===
+ scale_um  n_polys  n_filtered  mean_area  median_area  mean_iou  recall
+        6     2362        1662     57.946       30.726     0.458   0.302
+        8     1624        1136     90.655       37.148     0.443   0.216
+       10     1195         840    129.390       40.616     0.444   0.132
+       12      982         656    161.868       39.552     0.443   0.092
+       15      721         459    226.633       41.455     0.438   0.068
+
+10x Reference nucleus: mean=23.2, median=20.0 um2
+10x Reference cell:    mean=58.4, median=46.6 um2
+
+Key finding: IoU stays ~0.44-0.46 despite median area varying from 31 to 41 um2
+This indicates boundary SHAPE mismatch (transcript density vs membrane staining) is the limiting factor, not cell size.
+[0.2m] Saved: baysor_area_vs_scale_analysis.png
+[0.2m] 
+FIX 3: Parameter sensitivity — proper elasticity metric
+
+=== PARAMETER SENSITIVITY (ELASTICITY) ===
+Cellpose: diameter 20→40 px (+100%), cells 87→109 (+25.3%)
+  Elasticity = 25.3/100 = 0.25 (low — 25% output change per 100% param change)
+
+Baysor: scale 6→15 µm (+150%), cells 1700→495 (110% range)
+  Elasticity = 110/150 = 0.73 (high — 110% output change per 150% param change)
+
+Baysor is 2.9× more elastic (parameter-sensitive) than Cellpose
+[0.2m] Saved: parameter_sensitivity_comparison.png
+[0.2m] 
+FIX 4: Effect size — rank-biserial correlation
+
+=== EFFECT SIZE ===
+Mann-Whitney U = 327600, p = 2.02e-38
+Rank-biserial correlation r = -0.4237 (medium effect)
+Interpretation: Cellpose IoU values are higher than Baysor IoU values
+in 28.8% of all pairwise comparisons
+[0.2m] 
+FIX 5+6: Correct cell type annotations
+
+=== CORRECTED FULL TISSUE ANNOTATIONS ===
+  Cluster 0 → Epithelial                               | top: ['SFRP1', 'EPCAM', 'H3F3B', 'CD24', 'FADS2']
+  Cluster 1 → Macrophage/Immune                        | top: ['CD74', 'LYZ', 'ARHGDIB', 'IL2RG', 'HLA-G']
+  Cluster 2 → Endothelial                              | top: ['COL4A1', 'RGS5', 'PECAM1', 'HSPG2', 'PLVAP']
+  Cluster 3 → Stromal                                  | top: ['MMP2', 'CCDC80', 'FBLN1', 'C1R', 'CXCL12']
+  Cluster 4 → Hypoxic Epithelial                       | top: ['VEGFA', 'GAPDH', 'NDRG1', 'LDHA', 'KRT15']
+  Cluster 5 → Myoepithelial                            | top: ['KRT5', 'MYLK', 'LTF', 'GATA3', 'SERPINA3']
+  Cluster 6 → Luminal/Basal-like Epithelial            | top: ['KRT6B', 'SERPINA3', 'CD24', 'ENO1', 'VEGFA']
+
+=== FINAL PROPORTIONS ===
+  Epithelial: 24.5%
+  Macrophage/Immune: 21.0%
+  Endothelial: 15.7%
+  Stromal: 10.7%
+  Hypoxic Epithelial: 9.8%
+  Myoepithelial: 9.2%
+  Luminal/Basal-like Epithelial: 9.1%
+[0.2m] Saved: corrected full tissue figures
+[0.2m] 
+FIX 7: Quality filter sensitivity analysis
+
+=== QUALITY FILTER SENSITIVITY ===
+  No filter                : n=1624, recall=31.7%, IoU=0.444, noise_removed=56
+  area≥5, n≥5              : n=1360, recall=31.7%, IoU=0.444, noise_removed=320
+  area≥10, n≥10 (used)     : n=1171, recall=31.4%, IoU=0.444, noise_removed=509
+  area≥15, n≥15            : n=1041, recall=30.7%, IoU=0.445, noise_removed=639
+  area≥20, n≥20            : n= 968, recall=30.1%, IoU=0.445, noise_removed=712
+[0.2m] Saved: baysor_filter_sensitivity.png
+[0.2m] 
+=== FINAL CORRECTED RESULTS ===
+
+FAIR SAME-REFERENCE COMPARISON (both vs cell boundaries):
+  Cellpose vs cell: IoU=0.555 [0.546,0.564], Dice=0.702, Recall=71.6%
+  Baysor   vs cell: IoU=0.444 [0.434,0.455], Dice=0.607, Recall=31.4%
+
+  Mann-Whitney p=2.02e-38, Rank-biserial r=-0.424 (medium effect)
+  Cellpose IoU > Baysor in 28.8% of pairwise comparisons
+
+PARAMETER SENSITIVITY (elasticity):
+  Cellpose elasticity: 0.25
+  Baysor   elasticity: 0.73 (2.9x more sensitive)
+
+Baysor IoU ANALYSIS:
+  IoU range across scales: 0.438 - 0.458
+  Conclusion: boundary shape mismatch (not size) limits Baysor IoU
+
+QUALITY FILTER SENSITIVITY:
+  IoU range across thresholds: 0.444 - 0.445
+  Conclusion: filter choice is not critical for IoU/Recall
+[0.2m] 
+ALL FIXES COMPLETE in 0.2 minutes

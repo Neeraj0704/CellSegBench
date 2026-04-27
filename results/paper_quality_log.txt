@@ -1,0 +1,47 @@
+[0.0m] STEP 1: Load 2048x2048 DAPI tile
+[0.1m] Tile: (2048, 2048) = 435x435 µm
+[0.1m] STEP 2: Load tile transcripts
+[0.1m] Transcripts in tile: 230,056
+[0.1m] Baysor input saved: ../data/Human_Breast_Biomarkers_S1_Top_outs/baysor_input_large.csv
+[0.1m] STEP 3: Load 10x reference polygons
+[0.1m] 10x reference cells in tile: 1,432
+[0.1m] Reference nucleus polygons: 1,379
+[0.1m] Reference cell polygons: 1,432
+[0.1m] STEP 4: Running Cellpose on 2048x2048 tile...
+model_type argument is not used in v4.0.1+. Ignoring this argument...
+[25.0m] Cellpose: 1296 nuclei detected
+[25.1m] Cellpose polygons: 1,296
+[25.1m] Cellpose assignment: 88,506/230,056 (38.5%)
+[25.1m] Cellpose TPC: mean=68.3, median=54.0
+[25.1m] STEP 5: Running Baysor (scale=8 µm, retuned)...
+[27.1m] Baysor stdout: inates
+[20:25:11] Info: Processing complete.
+[20:25:14] Info: Estimating local colors
+[20:25:34] Info: Estimating boundary polygons
+[20:25:35] Warning: To many values of z (810). Binning z-stack into 10 layers for polygon estimation.
+└ Baysor.Processing /Users/neerajvp/.julia/packages/Baysor/7LPmz/src/processing/data_processing/boundary_estimation.jl:354
+[20:25:37] Info: Saving results to ../data/Human_Breast_Biomarkers_S1_Top_outs/baysor_output_large/segmentation.csv
+[20:25:41] Info: All done!
+
+[27.1m] Baysor transcripts: 230,056, columns: ['x', 'y', 'z', 'gene', 'molecule_id', 'confidence', 'cluster', 'cell', 'assignment_confidence', 'is_noise', 'ncv_color']
+Traceback (most recent call last):
+  File "/Users/neerajvp/Documents/Projects/CellSegBench/CellSegBench/notebooks/run_paper_quality.py", line 188, in <module>
+    n_by = baysor_df[baysor_df["cell"]>0]["cell"].nunique() if "cell" in baysor_df.columns else 0
+                     ^^^^^^^^^^^^^^^^^^^
+  File "/Users/neerajvp/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pandas/core/ops/common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/neerajvp/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pandas/core/arraylike.py", line 56, in __gt__
+    return self._cmp_method(other, operator.gt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/neerajvp/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pandas/core/series.py", line 6138, in _cmp_method
+    res_values = ops.comparison_op(lvalues, rvalues, op)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/neerajvp/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pandas/core/ops/array_ops.py", line 344, in comparison_op
+    res_values = comp_method_OBJECT_ARRAY(op, lvalues, rvalues)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/neerajvp/.pyenv/versions/3.11.9/lib/python3.11/site-packages/pandas/core/ops/array_ops.py", line 129, in comp_method_OBJECT_ARRAY
+    result = libops.scalar_compare(x.ravel(), y, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas/_libs/ops.pyx", line 107, in pandas._libs.ops.scalar_compare
+TypeError: '>' not supported between instances of 'str' and 'int'

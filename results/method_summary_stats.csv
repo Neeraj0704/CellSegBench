@@ -1,4 +1,4 @@
-Method,Cells,Assigned %,Mean TPC,Median TPC,Mean IoU,Mean Dice,Recall
-Xenium (10x),97,73.9,0.0,0.0,—,—,—
-Cellpose,91,32.2,45.5,35.0,0.78,0.872,79.4%
-Baysor,38,99.8,337.4,248.5,0.392,0.563,2.1%
+Method,Reference,Cells,Assigned%,Mean TPC,Mean IoU,95% CI,Dice,Recall
+Xenium 10x,—,1432,76.4%,~76,—,—,—,—
+Cellpose (nuclei),Nucleus,1296,38.5%,68.3,0.723,"[0.715,0.731]",0.831,84.1%
+Baysor (quality-filtered),Cell,1171,97.2%,190.9,0.444,"[0.434,0.455]",0.607,31.4%

@@ -1,0 +1,65 @@
+[0.0m] Loading DAPI tile for figures...
+[0.1m] Loading reference polygons...
+[0.1m] Reference: 1432 cells, 1379 nucleus polys, 1432 cell polys
+[0.1m] Loading Cellpose polygons...
+[0.3m] Cellpose polygons: 1,296
+[0.3m] Loading Baysor output...
+[0.3m] Baysor: 230,056 transcripts, 1680 cells
+[0.3m] Baysor polygons: 1,624
+[0.3m] Computing IoU/Dice...
+[0.3m] Cellpose vs nucleus: IoU=0.723, Dice=0.831, Recall=84.1%
+[0.3m] Cellpose vs cell:    IoU=0.555, Dice=0.702, Recall=71.6%
+[0.3m] Baysor vs nucleus:   IoU=0.424,  Dice=0.589,  Recall=13.9%
+[0.3m] Baysor vs cell:      IoU=0.444,  Dice=0.607,  Recall=31.7%
+
+============================================================
+           Method  Cells  Assigned%  Mean TPC  Median TPC IoU vs Nucleus Dice vs Nucleus Recall vs Nucleus IoU vs Cell Dice vs Cell Recall vs Cell
+       Xenium 10x   1432       76.4       0.8         0.0              —               —                 —           —            —              —
+Cellpose (nuclei)   1296       38.5      68.3        54.0          0.723           0.831             84.1%       0.555        0.702          71.6%
+   Baysor (cells)   1624       99.1     135.7        40.0          0.424           0.589             13.9%       0.444        0.607          31.7%
+============================================================
+
+[0.3m] Generating figures...
+[0.3m] Saved: side_by_side_3way.png
+[0.3m] Saved: iou_distributions_both.png
+[0.3m] Saved: three_way_iou_comparison.png
+[0.3m] Saved: transcripts_per_cell_comparison.png
+[0.3m] Saved: baysor_segmentation_map.png
+[0.3m] Saved: cellpose_segmentation_map.png
+[0.3m] Downstream analysis on large tile...
+[0.4m]   Xenium 10x: 1467 cells, 8 clusters
+[0.5m]   Cellpose: 1278 cells, 6 clusters
+[0.5m]   Baysor: 1549 cells, 9 clusters
+[0.5m] Saved: umap_comparison_methods.png
+[0.5m] Validating cell type annotation from marker genes...
+
+=== VALIDATED MARKER GENES PER CLUSTER ===
+  Cluster 0 → Epithelial           | top genes: ['SFRP1', 'H3F3B', 'EPCAM', 'CD24', 'FADS2']
+  Cluster 1 → Macrophage           | top genes: ['CD74', 'LYZ', 'ARHGDIB', 'IL2RG', 'HLA-G']
+  Cluster 2 → Endothelial          | top genes: ['COL4A1', 'RGS5', 'PECAM1', 'HSPG2', 'PLVAP']
+  Cluster 3 → Unknown              | top genes: ['MMP2', 'CCDC80', 'FBLN1', 'C1R', 'CXCL12']
+  Cluster 4 → Myoepithelial        | top genes: ['KRT5', 'MYLK', 'LTF', 'GATA3', 'SERPINA3']
+  Cluster 5 → Unknown              | top genes: ['KRT6B', 'SERPINA3', 'CD24', 'ENO1', 'VEGFA']
+  Cluster 6 → Unknown              | top genes: ['VEGFA', 'NDRG1', 'GAPDH', 'LDHA', 'IGFBP5']
+
+=== VALIDATED CELL TYPE PROPORTIONS ===
+  Epithelial: 27.5%
+  Unknown: 26.5%
+  Macrophage: 20.6%
+  Endothelial: 16.1%
+  Myoepithelial: 9.3%
+[0.5m] Saved: validated annotation figures
+[0.5m] Spatial neighbourhood enrichment...
+[0.7m] Saved: neighbourhood_enrichment.png
+[0.7m] 
+============================================================
+[0.7m] PAPER-QUALITY STEP 2 COMPLETE in 0.7 minutes
+[0.7m] ============================================================
+
+Key results:
+  Cellpose vs nucleus: IoU=0.723, Dice=0.831, Recall=84.1%
+  Cellpose vs cell:    IoU=0.555, Dice=0.702, Recall=71.6%
+  Baysor vs nucleus:   IoU=0.424,  Dice=0.589,  Recall=13.9%
+  Baysor vs cell:      IoU=0.444,  Dice=0.607,  Recall=31.7%
+
+All results in: /Users/neerajvp/Documents/Projects/CellSegBench/CellSegBench/results
